@@ -1,16 +1,10 @@
-import static org.junit.Assert.assertEquals;
-
 import java.util.ArrayList;
 import java.util.Collection;
 
 public class MaxHeap
 {
    private ArrayList<Student> students; // will build the heap out of the arraylist
-   /**
-    * constructor that takes in an int(positive) and creates an empty arraylist of type student
-    * that specified the initial capacity.
-    * @param capacity
-    */
+  
    public MaxHeap(int capacity)
    {
       students = new ArrayList<Student>(capacity); 
@@ -19,23 +13,13 @@ public class MaxHeap
    public MaxHeap(Collection<Student> collection)
    {
       students = new ArrayList<Student>(collection);
-      /**
-       * We maxHapify starting from the bottom-up, left-to-right. 
-       * we initialize at size/2 -1 because the last element will on the longest edge in the heap, and
-       * based on heap structure, size/2 will give use the edge length.
-       * i-- will move onto the next longest edge until we get to 0, the root. 
-       */
+     
       for(int i = size()/2 - 1; i >= 0; i--)
       {
          maxHeapify(i);
       }
    }
-   /**
-    * Returns the max value of the heap.
-    * According to the property of a max heap, the root will always be the largest value in the heap.
-    * if the arraylist has no elements, then we do not have a root we can get.
-    * @return
-    */
+   
    public Student getMax()
    {
       if(size() < 1)
@@ -60,18 +44,7 @@ public class MaxHeap
       return students.size(); 
    }
    
-   private void moveUp(Student stu) {
-	  int index = students.indexOf(stu);
-	  int parentLocation = parent(index);
-	  Student parent = students.get(parentLocation);
-	  while(index > 0 && stu.compareTo(parent) > 0) { // dont need to check if root is larger than parent
-		   	// if parent node is smaller, swap with newly created node:
-		   	swap(index, parentLocation);
-		   	index = parentLocation;  
-	   } 
-   }
-   
-   
+  
    public void insert(Student elt)
    {
       //Please write me.  I should add the given student into the heap,
@@ -94,8 +67,7 @@ public class MaxHeap
 	   elt.addGrade(gradePointsPerUnit, units);
 	   int index = students.indexOf(elt);
 	   int parIndex = parent(index);
-	   int leftIndex = left(index);
-	   int rightIndex = right(index);
+	   boolean GpaIncrease = false;
 	   
 	   /** if elt's GPA has increased to the point where it is larger than its parent's gpa,
 	    * we need to move elt up the heap
@@ -104,15 +76,12 @@ public class MaxHeap
 		   	swap(index, parIndex);
 		   	index = parIndex;  
 		  	parIndex = parent(index); // update parent location
+		  	GpaIncrease = true;
 	   }
 	   /**
-	    * If the gpa decreased, check to see if elt's students should be moving up
+	    * If elt's GPA is not bigger than parent, then check to see if we need to move elt down the heap.
 	    */
-		   
-	   Student leftStudent = students.get(leftIndex);
-	   Student rightStudent = students.get(rightIndex);
-	   
-	   while(index > 0 && (elt.compareTo(leftStudent) < 0 || elt.compareTo(rightStudent) < 0)) {
+	   if(GpaIncrease == false) { 
 		   maxHeapify(index);
 	   }
    }
@@ -160,6 +129,7 @@ public class MaxHeap
       }  
    }   
    public static void main(String[] args) {
+	   /*
 	   MaxHeap heap = new MaxHeap(10);
 	   Student susan = new Student("Susan", 3, 6);
 	   Student ben = new Student("Ben", 2.4, 10);
@@ -176,7 +146,7 @@ public class MaxHeap
 	   System.out.println("susan gpa:"+susan.gpa());
 	   assertEquals(susan, heap.getMax());
 	   
-	
+	*/
 	   
    }
 }

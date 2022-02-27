@@ -8,15 +8,17 @@ import org.junit.Test;
 
 public class SimpleGivenTests
 {
-	@Test
-	public void studentclassCheck() {
-		Student stu = new Student("Stu", 3.2, 20);
-		System.out.println(stu.getName());
-	}
-	
-	
-	
-	@Test
+   @Test
+   public void oneStudent()
+   {
+      MaxHeap heap = new MaxHeap(10);
+      heap.insert(new Student("Susan", 3.5, 60));
+      assertEquals(3.5, heap.extractMax().gpa(), .000001);
+      assertEquals(0, heap.size());
+   }
+   
+   
+   @Test
 	public void constructorCheck() {
 		Student susan = new Student("Susan", 3, 6);
 		Student ben = new Student("Ben", 2.4, 10);
@@ -36,15 +38,6 @@ public class SimpleGivenTests
 		
 	}
 	
-	
-   @Test
-   public void oneStudent()
-   {
-      MaxHeap heap = new MaxHeap(10);
-      heap.insert(new Student("Susan", 3.5, 60));
-      assertEquals(3.5, heap.extractMax().gpa(), .000001);
-      assertEquals(0, heap.size());
-   }
 
    @Test
    public void aInsertAFewStudents()
@@ -54,7 +47,6 @@ public class SimpleGivenTests
       heap.insert(new Student("Ben", 3.4, 70));
       heap.insert(new Student("Reed", 4.0, 120));
       heap.insert(new Student("Johnny", 1.2, 50));
-      System.out.println("Test 2" +"current max:" + heap.getMax().getName()); // my own statement
       assertEquals(4.0, heap.extractMax().gpa(), .000001);
       assertEquals(3.5, heap.extractMax().gpa(), .000001);
       heap.insert(new Student("Billy", 2.7, 20));
@@ -86,15 +78,12 @@ public class SimpleGivenTests
 	   Student ben = new Student("Ben", 2.4, 10);
 	   Student reed = new Student("Reed", 3.3, 3);
 	   Student johnny = new Student("Johnny", 1, 4);
-	   heap.insert(susan);
+	   heap.insert(susan);;
 	   heap.insert(ben);
 	   heap.insert(johnny);
 	   heap.insert(reed);
-	   System.out.println("The max"+heap.getMax().getName()); // my own statement
 	   assertEquals(reed, heap.getMax());
-	
 	   heap.addGrade(susan, 4, 3);  //should give her a 3.333333333 gpa
-	   System.out.println("susan gpa:"+susan.gpa());
 	   assertEquals(susan, heap.getMax());
 	   assertEquals(3.33333333, heap.extractMax().gpa(), .000001);
 	   heap.addGrade(reed, .7, 3);  //should give him a 2.0
@@ -103,8 +92,5 @@ public class SimpleGivenTests
 	   assertEquals(2.4, heap.extractMax().gpa(), .000001);
 	   assertEquals(2.0, heap.extractMax().gpa(), .000001);
    }
-   
-   
-
    
 }

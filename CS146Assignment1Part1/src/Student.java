@@ -3,7 +3,6 @@ public class Student implements Comparable<Student>
    private String name;
    private double gradePoints = 0;
    private int units = 0;
-   private int studentIndex;
    
 public Student(String name)
    {
